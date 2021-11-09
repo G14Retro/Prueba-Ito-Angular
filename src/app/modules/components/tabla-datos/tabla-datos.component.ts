@@ -11,10 +11,10 @@ import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component'
   styleUrls: ['./tabla-datos.component.scss']
 })
 export class TablaDatosComponent implements OnInit,AfterViewInit {
-  @Input() dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator) paginator:MatPaginator;
 
-  displayedColumns:string[] = ['acciones','usuario','email','nombres','apellidos','activo'];
+  displayedColumns:string[] = ['usuario','email','nombres','apellidos','activo','acciones'];
   length;
   pageSize = 5;
   page = 1;
@@ -40,18 +40,14 @@ export class TablaDatosComponent implements OnInit,AfterViewInit {
     this.paginator._intl.itemsPerPageLabel="Registros por página";
   }
 
-  pageEvent(event:any){
-    this.pageSize = event.pageSize;
-    this.page = event.pageIndex + 1;
-  }
-
   detalleUsuario(id_user){
 
   }
 
   
-  filtro(){
-    
+  filtro(event: Event){
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   crearUsuario(){
@@ -61,6 +57,34 @@ export class TablaDatosComponent implements OnInit,AfterViewInit {
       data: {
         type: 'crear',
         title: 'Crear usuario',
+      },
+      panelClass: 'custom-dialog-container',
+    });
+
+  }
+
+  editar(dato: any){
+
+    const dialogCrearUsuario = this.dialog.open(CrearUsuarioComponent, {
+      width: '80%',
+      data: {
+        type: 'editar',
+        title: 'Editar usuario',
+        data: dato
+      },
+      panelClass: 'custom-dialog-container',
+    });
+
+  }
+
+  ver(dato: any){
+
+    const dialogCrearUsuario = this.dialog.open(CrearUsuarioComponent, {
+      width: '80%',
+      data: {
+        type: 'ver',
+        title: 'Ver usuario',
+        data: dato
       },
       panelClass: 'custom-dialog-container',
     });

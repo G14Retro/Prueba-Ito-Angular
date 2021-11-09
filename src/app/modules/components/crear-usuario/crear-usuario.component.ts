@@ -11,11 +11,15 @@ export class CrearUsuarioComponent implements OnInit {
 
 
   formUser: any;
+  disable:boolean = false;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.formControl();
+    if (this.data.data) {
+      this.setData(this.data.data);
+    }
   }
 
 
@@ -25,7 +29,7 @@ export class CrearUsuarioComponent implements OnInit {
       nombre: new FormControl('', [Validators.required, Validators.maxLength(100), Validators.minLength(3)]),
       apellido: new FormControl('', [Validators.required]),
       email: new FormControl('', [ Validators.email, Validators.required]),
-      usuario: new FormControl('', [ Validators.maxLength(20), Validators.required,Validators.pattern('/^[a-z,A-Z]/')]),
+      usuario: new FormControl('', [ Validators.maxLength(20), Validators.required]),
       estado: new FormControl('', [ Validators.required]),
     });
 
@@ -37,5 +41,23 @@ export class CrearUsuarioComponent implements OnInit {
 
   }
 
+  setData(data: any){
+    console.log(data);
+      this.formUser.controls.nombre.setValue(data.nombres);
+      this.formUser.controls.apellido.setValue(data.apellidos);
+      this.formUser.controls.email.setValue(data.email);
+      this.formUser.controls.usuario.setValue(data.usuario);
+      this.formUser.controls.estado.setValue(data.activo);
+
+    if(this.data.type === 'ver'){
+      
+      this.disable = true;
+
+    } else if(this.data.type === 'editar') {
+
+      this.disable = false;
+    }
+
+  }
 
 }
