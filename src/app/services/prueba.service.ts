@@ -45,8 +45,8 @@ private _refresh$ = new Subject<void>();
     return this.usuarios;
   }
 
-  getById(id){
-
+  filtro(id){
+    
   }
 
   save(data){

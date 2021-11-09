@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { PruebaService } from 'src/app/services/prueba.service';
+import { CrearUsuarioComponent } from '../crear-usuario/crear-usuario.component';
 
 @Component({
   selector: 'app-tabla-datos',
@@ -18,6 +19,12 @@ export class TablaDatosComponent implements OnInit,AfterViewInit {
   pageSize = 5;
   page = 1;
   pageSizeOptions = [5,10,25,50,100];
+  
+  //Filtros
+  filtroEmail:string = '';
+  filtroUsuario:string = '';
+  filtroNombres:string = '';
+  filtroApellidos:string = '';
   constructor(
     private dialog:MatDialog,
     private pruebaService:PruebaService,
@@ -39,7 +46,25 @@ export class TablaDatosComponent implements OnInit,AfterViewInit {
   }
 
   detalleUsuario(id_user){
+
+  }
+
+  
+  filtro(){
     
+  }
+
+  crearUsuario(){
+
+    const dialogCrearUsuario = this.dialog.open(CrearUsuarioComponent, {
+      width: '60%',
+      data: {
+        type: 'crear',
+        title: 'Crear usuario',
+      },
+      panelClass: 'custom-dialog-container',
+    });
+
   }
 
 }

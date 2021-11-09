@@ -9,11 +9,6 @@ import { CrearUsuarioComponent } from '../components/crear-usuario/crear-usuario
 })
 export class HomeComponent implements OnInit {
 
-  //Filtros
-  filtroEmail:string = '';
-  filtroUsuario:string = '';
-  filtroNombres:string = '';
-  filtroApellidos:string = '';
   constructor(
     private dialog:MatDialog,
   ) { }
@@ -21,21 +16,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  filtro(){
-    
-  }
-
-  crearUsuario(){
-
-    const dialogCrearUsuario = this.dialog.open(CrearUsuarioComponent, {
-      width: '60%',
-      data: {
-        type: 'crear',
-        title: 'Crear usuario',
-      },
-      panelClass: 'custom-dialog-container',
-    });
-
-  }
+  
 
 }
